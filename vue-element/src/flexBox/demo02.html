@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="container">
+  <div class="item">元素一</div>
+  <div class="item">元素二</div>
+  <div class="item">元素三</div>
+</div>
+<style>
+  .container {
+    display: flex;
+    width: 300px; //把容器宽度设置为 300px;
+  }
+  .item {
+    width: 150px; // 每个项目宽度为 150px，加起来大于 300px
+  line-height: 100px; // 设置项目默认撑开的高度为 100px
+  }
+  .container :nth-child(1) {
+    background-color: #E3ABB3;
+    height: 100px; // 第一个项目给定固定高度 100px；
+  }
+  .container :nth-child(2) {
+    background-color: #9DC54B;
+  }
+  .container :nth-child(3) {
+    background-color: #1FBEE7;
+    height: 300px;
+  }
+</style>
+
+</body>
+</html>

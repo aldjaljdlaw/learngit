@@ -1,0 +1,52 @@
+<!--
+Ajax测试
+  需求：点击按钮，下方输出json文件的内容
+  点击按钮，执行loadXMLDoc函数,loadXMLDoc() 函数创建 XMLHttpRequest 对象，添加当服务器响应就绪时执行的函数，并将请求发送到服务器。
+当服务器响应就绪时，我们就使用 JSON.parse() 方法将数据转换为 JavaScript 对象。
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AjaxTestDemo</title>
+</head>
+<body>
+<!--生成按钮-->
+<div>
+  <button type="button" onclick="loadXMLDoc()">请求json数据</button>
+</div>
+<div id="myDiv"></div>
+<!--实现loadXMLDoc函数-->
+<script>
+
+  function loadXMLDoc(){
+    var xmlhttp;
+    if (window.XMLHttpRequest){
+      xmlhttp =new XMLHttpRequest();
+    }
+    else {
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange= function (){
+      if (xmlhttp.readyState===4 &&xmlhttp.status===200){
+        var myArr = JSON.parse(this.responseText);
+        myFunction(myArr);
+      }
+    }
+    xmlhttp.open("GET","jetbrains://idea/navigate/reference?project=vue-element&path=src/AjaxTest/json_ajax",true)
+    xmlhttp.setRequestHeader("Content-Type","application/json;charset:UTF-8");
+    xmlhttp.send(JSON.stringify({ "email": "admin@runoob.com", "response": { "name": "runoob" } }));
+  }
+  function myFunction(arr){
+    var out ="";
+    var i;
+    for (i=0;i<arr.length;i++){
+      out +='<a href="'+arr[i].url+'">'+arr[i].title+'</a><br>'
+    }
+    document.getElementById("myDiv").innerHTML=out;
+  }
+
+</script>
+
+</body>
+</html>
